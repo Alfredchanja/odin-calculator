@@ -38,3 +38,12 @@ function operate(a, b, operator) {
 }
 
 add = operate(num1, num2, operator);
+
+//Export the functions for use in other files
+module.exports = {
+    sum,
+    difference,
+    product,
+    quotient,
+    operate
+};
