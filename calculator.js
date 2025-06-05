@@ -28,7 +28,7 @@ function operate(a, b, operator) {
             return sum(a, b);
         case "-":
             return difference(a, b);
-        case "*":
+        case "x":
             return product(a, b);
         case "/":
             return quotient(a, b);
@@ -36,14 +36,3 @@ function operate(a, b, operator) {
             return console.log("Error: Invalid operator");
     }
 }
-
-add = operate(num1, num2, operator);
-
-//Export the functions for use in other files
-module.exports = {
-    sum,
-    difference,
-    product,
-    quotient,
-    operate
-};
