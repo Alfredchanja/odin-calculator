@@ -1,27 +1,30 @@
-num1 = 0;
-num2 = 0;
-operator = "";
 
+// Function to perform basic arithmetic operations
+// Sum function.
 function sum(a, b){
-    return console.log(a + b);
+    return a + b;
 };
 
+// Difference function.
 function difference(a, b){
-    return console.log(a - b);
+    return a - b;
 };
 
+// Product function.
 function product(a, b){
-    return console.log(a * b);
+    return a * b;
 };
 
+// Quotient function with error handling for division by zero.
 function quotient(a, b){
     if (b === 0) {
-        return console.log("Error: Cannot divide by zero");
+        return "Error: Cannot divide by zero";
     } else {
-        return console.log(a / b);
+        return a / b;
     }
 };
 
+// Function to perform basic arithmetic operations
 function operate(a, b, operator) {
     switch (operator) {
         case "+":
@@ -33,6 +36,8 @@ function operate(a, b, operator) {
         case "/":
             return quotient(a, b);
         default:
-            return console.log("Error: Invalid operator");
+            return "Error: Invalid operator";
     }
 }
+
+

@@ -1,3 +1,7 @@
+let num1 = null;
+let num2 = null;
+let operator = null;
+
 // Event listeners to buttons.
 document.querySelectorAll('button').forEach(function (button) {
     button.addEventListener('click', function () {
@@ -8,23 +12,39 @@ document.querySelectorAll('button').forEach(function (button) {
         // Check if the input field exists
         // If the button is "AC", clear the input field
         // Otherwise, append the button text to the input field
-         if (buttonText === "AC") {
+        if (buttonText === "AC") {
             inputField.value = '';
-        } else if (buttonText === "=") { // Outputs the result if the '=' button is clicked.
-            const parts = inputField.value.split(' ');
-            if (parts.length === 3) {
-                const num1 = parseFloat(parts[0]);
-                const operator = parts[1];
-                const num2 = parseFloat(parts[2]);
-                const result = operate(num1, num2, operator);
+        } else if (['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'].includes(buttonText)) {
+            inputField.value = buttonText;
+
+            // If the operator is not set, assign the first number to num1 else assign it to num2.
+            if (!operator) {
+                num1 = parseFloat(inputField.value);
+            } else {
+                num2 = parseFloat(inputField.value);
+            }
+        } else if (["+", "-", "x", "/"].includes(buttonText)) {
+            if (inputField.value) {
+                if (operator && inputField.value) {
+                    num1 = operate(num1, num2, operator);
+                }
+                operator = buttonText;
+                inputField.value = num1;
+            } else {
+                inputField.value = "Error: Invalid input";
+            }
+        } else if (buttonText === "=") {
+            const result = operate(num1, num2, operator);
+            num1 = result; // Update num1 with the result for further calculations
+            num2 = null; // Reset num2 for the next operation
+            operator = null; // Reset operator for the next operation
+
+            // Display the result in the input field if it's valid.
+            if (result !== undefined) {
                 inputField.value = result;
             } else {
                 inputField.value = "Error: Invalid expression";
             }
-        } else if (["+", "-", "x", "/"].includes(buttonText)) {
-            inputField.value += ` ${buttonText} `;
-        } else {
-            inputField.value += buttonText;
         }
     });
 });
