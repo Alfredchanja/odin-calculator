@@ -42,3 +42,13 @@ function operate(num1, num2, operator) {
             return "Error: Invalid operator";
     }
 }
+
+function display () {
+    const display = document.querySelectorAll("button");
+
+    display.forEach((button) => {
+        console.log(button.className);
+    })
+};
+
+display();
