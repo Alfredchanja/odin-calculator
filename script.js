@@ -47,7 +47,16 @@ function display () {
     const display = document.querySelectorAll("button");
 
     display.forEach((button) => {
-        console.log(button.className);
+        button.addEventListener("click", () => {
+            if (button.classList.contains("num")) {
+                digits = button.textContent;
+                console.log(digits);
+            }
+            else{
+                operator = button.textContent;
+                console.log(operator);
+            }}
+        );
     })
 };
 
