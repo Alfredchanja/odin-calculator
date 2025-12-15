@@ -1,4 +1,4 @@
-let num1 = null;
+let num1 = "";
 let num2 = null;
 let operator = null;
 
@@ -49,8 +49,11 @@ function display () {
     display.forEach((button) => {
         button.addEventListener("click", () => {
             if (button.classList.contains("num")) {
-                digits = button.textContent;
-                console.log(digits);
+                const value = button.textContent;
+                if (!isNaN(value)) {
+                    num1 += value;
+                }
+                console.log(num1);
             }
             else{
                 operator = button.textContent;
