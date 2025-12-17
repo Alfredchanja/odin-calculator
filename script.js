@@ -1,5 +1,5 @@
-let num1 = "";
-let num2 = null;
+let currentInput = "";
+let firstValue = null;
 let operator = null;
 
 // Function to perform basic arithmetic operations
@@ -48,18 +48,24 @@ function display () {
 
     display.forEach((button) => {
         button.addEventListener("click", () => {
-            if (button.classList.contains("num")) {
-                const value = button.textContent;
-                if (!isNaN(value)) {
-                    num1 += value;
-                }
-                console.log(num1);
-            }
-            else{
+
+            const value = button.textContent;
+
+            if (!isNaN(value) && value !== " ") {
+                currentInput += value;
+            } else if (["+", "-", "x", "/"].includes(value) && currentInput !== "") {
+                firstValue = parseFloat(currentInput);
+                operator = value;
+                currentInput = "";
+
+                console.log(firstValue);
+                console.log(operator);
+                console.log(currentInput);
+            } else{
                 operator = button.textContent;
                 console.log(operator);
-            }}
-        );
+            }
+        });
     })
 };
 
