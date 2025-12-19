@@ -65,6 +65,19 @@ function display () {
             } else if (value === "=" && currentInput !== "" && firstValue !== null && operator !== null){
                 secondValue = parseFloat(currentInput); // Store the second input value of the user.
                 console.log(secondValue);
+                let result = operate(firstValue, secondValue, operator); // Perform the operation.
+                console.log(result); // Display the result in the console.
+
+                // Reset for the next calculation.
+                currentInput = result.toString();
+                firstValue = null;
+                secondValue = null;
+                operator = null;
+            } else if (value === "AC") {
+                currentInput = "";
+                firstValue = null;
+                secondValue = null;
+                operator = null;
             }
         });
     })
