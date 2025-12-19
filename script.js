@@ -1,5 +1,6 @@
 let currentInput = "";
 let firstValue = null;
+let secondValue = null;
 let operator = null;
 
 // Function to perform basic arithmetic operations
@@ -51,19 +52,19 @@ function display () {
 
             const value = button.textContent;
 
-            if (!isNaN(value) && value !== " ") {
-                currentInput += value;
+            if (!isNaN(value) && value !== " " || value === ".") {
+                currentInput += value; // Append the clicked number to the current input.
             } else if (["+", "-", "x", "/"].includes(value) && currentInput !== "") {
-                firstValue = parseFloat(currentInput);
-                operator = value;
-                currentInput = "";
+                firstValue = parseFloat(currentInput); // Store the first input value of the user
+                operator = value; // Store the operator.
+                currentInput = ""; // Clear current input for the next number.
 
                 console.log(firstValue);
                 console.log(operator);
                 console.log(currentInput);
-            } else{
-                operator = button.textContent;
-                console.log(operator);
+            } else if (value === "=" && currentInput !== "" && firstValue !== null && operator !== null){
+                secondValue = parseFloat(currentInput); // Store the second input value of the user.
+                console.log(secondValue);
             }
         });
     })
