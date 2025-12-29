@@ -80,6 +80,10 @@ function display () {
                     justCalculated = false; // Reset the flag.
                 }
 
+                if (currentInput === "0") {
+                    currentInput = ""; // Removes leading zero.
+                }
+
                 currentInput += value; // Append the clicked number to the current input.
                 updateScreen(currentInput); // Update the screen with the current input.
             } else if (["+", "-", "x", "/"].includes(value)) {
@@ -95,6 +99,25 @@ function display () {
                 currentInput = ""; // Clear current input for the next number.
 
                 updateScreen(firstValue); // Update the screen with the first value.
+            } else if (value === "C") {
+                // Remove the last character fromt the current input.
+                if (justCalculated) {
+                    currentInput = "";
+                    justCalculated = false; // Reset the flag.
+                    updateScreen("0");
+                    return;
+                }
+
+                currentInput = currentInput.slice(0, -1);
+
+                if (currentInput === "") {
+                    currentInput = "0";
+                    updateScreen(currentInput);
+                } else {
+                    currentInput = currentInput;
+                    updateScreen(currentInput); // Update the screen or show 0 if empty.
+                    }
+                
             } else if ((value === "=" && currentInput !== "" && firstValue !== null && operator !== null)) {
                 secondValue = parseFloat(currentInput); // Store the second input value of the user.
                 let result = operate(firstValue, secondValue, operator).toFixed(2); // Perform the operation.
