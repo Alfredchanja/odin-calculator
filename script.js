@@ -3,6 +3,7 @@ let firstValue = null;
 let secondValue = null;
 let operator = null;
 const screen = document.getElementById("screen");
+let justCalculated = false;
 
 // Function to perform basic arithmetic operations
 // Sum function.
@@ -59,10 +60,29 @@ function display () {
 
             const value = button.textContent;
 
-            if (!isNaN(value) && value !== " " || value === ".") {
+            if ((!isNaN(value) && value !== " ") || value === ".") {
+
+                // Prevent multiple decimal points in the current input.
+                if (value === "." && currentInput.includes(".")) {
+                    return; 
+                }
+
+                // Prepend '0' if decimal point is the first input.
+                if (value === "." && currentInput === "") {
+                    currentInput = "0."; 
+                    updateScreen(currentInput);
+                    return;
+                }
+
+                // Clear current input if a calculation was just performed.
+                if (justCalculated) {
+                    currentInput = "";
+                    justCalculated = false; // Reset the flag.
+                }
+
                 currentInput += value; // Append the clicked number to the current input.
                 updateScreen(currentInput); // Update the screen with the current input.
-            } else if (["+", "-", "x", "/"].includes(value) && currentInput !== "") {
+            } else if (["+", "-", "x", "/"].includes(value)) {
 
                 if (firstValue === null){
                     firstValue = parseFloat(currentInput); // Store the first input value of the user
@@ -82,9 +102,10 @@ function display () {
 
                 // Reset for the next calculation.
                 currentInput = result.toString();
-                firstValue = null;
+                firstValue = parseFloat(result);
                 secondValue = null;
                 operator = null;
+                justCalculated = true; // Set the flag indicating a calculation was just performed.
             } else if (value === "AC") {
                 // Clear all values and reset the calculator.
                 currentInput = "";
